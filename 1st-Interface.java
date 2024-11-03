@@ -10,72 +10,55 @@ public class OO2Project extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(700, 500);
-
+///---------------------------------------------------------------------------------
         // ------------Background panel------------////
-        
-        JPanel backgroundPanel = new JPanel() {
-            @Override
+        JPanel backgroundPanel = new JPanel(new BorderLayout()) {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon beeBackground = new ImageIcon("C:\\Users\\reeal\\OneDrive\\illustrator\\taskbee\\TASKBEE1-05.png");
-                g.drawImage(beeBackground.getImage(), 0, 0, getWidth(), getHeight(), this);
+                ImageIcon taskbeeBackground = new ImageIcon("C:\\Users\\reeal\\OneDrive\\illustrator\\taskbee\\TASKBEE1-05.png");
+                g.drawImage(taskbeeBackground.getImage(), 0, 0, getWidth(), getHeight(), this);
             }
         };
-        backgroundPanel.setLayout(new GridBagLayout()); // Use GridBagLayout to center components
-        //---------------------------------------------------------------------------
-        
-        // Center panel for labels and content
-        JPanel centerPanel = new JPanel();
-        // make mangerlayout to be gridboxlayout <<swing >> 
-        ///the components will be added vertically 
-        // تكون فوق بعضها 
-        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
-        centerPanel.setOpaque(false); // Make transparent to show background
-        
-        //---------------------------------------------------------------------------
+///---------------------------------------------------------------------------------
+        // Center panel with BorderLayout to add components vertically
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.setOpaque(false); //to be transparent 
+///-----------------------------------------------------------------------------------
         // Title label << welcome to taskbee >>
-        JLabel titleLabel = new JLabel("Welcome to TaskBee");
-        // set fonts for label + bold + color
+        JLabel titleLabel = new JLabel("Welcome to TaskBee", JLabel.CENTER);
         titleLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
         titleLabel.setForeground(Color.BLACK);
-        //to make alignment in the center of the box
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        ///--------------------------------------------------------------------------
-        // -----Subtitle label  << busy as a bee , productive as can bee >> 
-        JLabel subtitleLabel = new JLabel("Busy as a Bee, Productive as Can Be");
+//-----------------------------------------------------------------------------------------
+        // Subtitle label << busy as a bee, productive as can bee >>
+        JLabel subtitleLabel = new JLabel("Busy as a Bee, Productive as Can Be", JLabel.CENTER);
         subtitleLabel.setFont(new Font("Serif", Font.PLAIN, 16));
         subtitleLabel.setForeground(Color.BLACK);
-        subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        //-----------------------------------------------------------------------------
-        // ------Bee name label --------//
+//---------------------------------------------------------------------------------------------
+        // <Bee name> label and <text field> 
         JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        namePanel.setOpaque(false); // Transparent background
+        namePanel.setOpaque(false);
         JLabel nameLabel = new JLabel("Bee name:");
-        // ------text field ------------//
+        ///textfield
         JTextField nameField = new JTextField(15);
         namePanel.add(nameLabel);
         namePanel.add(nameField);
-        //-----------------------------------------------------------------------------
-        // -------Enter button--------//
+//-------------------------------------------------------------------------------------------------
+        // Enter button panel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
         JButton enterButton = new JButton("Enter your Beehive");
-        enterButton.setBackground(new Color(255, 255, 153));       // Light yellow background for button
-        // make the alignment in the center 
-        enterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        // Add components to the center panel
-        centerPanel.add(titleLabel);
-        // to seprate between components <<spacer >> in BoxLayout 
-        centerPanel.add(Box.createVerticalStrut(5));
-        centerPanel.add(subtitleLabel);
-        centerPanel.add(Box.createVerticalStrut(15)); 
-        centerPanel.add(namePanel);
-        centerPanel.add(Box.createVerticalStrut(15)); 
-        centerPanel.add(enterButton);
-
-        // Add <<center panel>> to <<background panel>>  in the center
-        backgroundPanel.add(centerPanel);
-
-        // Add background panel to frame
+        enterButton.setBackground(new Color(255, 255, 153)); // Light yellow background
+        buttonPanel.add(enterButton);
+//-----------------------------------------------------------------------------------------------
+        // Add components in centerPanel in the correct positions
+        centerPanel.add(titleLabel, BorderLayout.NORTH);
+        centerPanel.add(subtitleLabel, BorderLayout.CENTER);
+        centerPanel.add(namePanel, BorderLayout.SOUTH);
+//----------------------------------------------------------------------------------------------------
+        // Add centerPanel to background panel at center position
+        backgroundPanel.add(centerPanel, BorderLayout.CENTER);
+        backgroundPanel.add(buttonPanel, BorderLayout.SOUTH);
+        // Add background panel to the frame
         add(backgroundPanel);
 
         setVisible(true);
